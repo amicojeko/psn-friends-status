@@ -9,7 +9,8 @@
 */
 
 var
-	 gumerPSN = require('./lib/psn')		 // Gumer Playstation module
+   PORT     = process.env.PORT || 55555000
+	,gumerPSN = require('./lib/psn')		 // Gumer Playstation module
 	,express 	= require('express')	 // Express
 	,async 	  = require('async')
 	,app 		  = express()				     // Express application instance
@@ -19,11 +20,11 @@ var
 console.log('Starting gPSN');
 
 gumerPSN.init({	                     // Our PSN Module, we have to start it once. - irkinsander
-	      debug: true	                 // Let's set it true, it's still in early development. So, report everything that goes wrong please.
-	     ,email: process.env.PSN_EMAIL // A valid PSN/SCE account (can be new one) // TODO: Using the user's credentials to do this.
-	  ,password: process.env.PSN_PASS	 // Account's password
-	,npLanguage: "en"			             // The language the trophy's name and description will shown as
-	    ,region: "it"			             // The server region that will push data
+	 debug      : true	                 // Let's set it true, it's still in early development. So, report everything that goes wrong please.
+	,email      : process.env.PSN_EMAIL // A valid PSN/SCE account (can be new one) // TODO: Using the user's credentials to do this.
+	,password   : process.env.PSN_PASS	 // Account's password
+	,npLanguage : "en"			             // The language the trophy's name and description will shown as
+	,region     : "it"			             // The server region that will push data
 });
 
 // Taken from Express site, this takes /{{id}}/ parameter
@@ -81,5 +82,5 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 })
 
 // We listen in the port 3000
-app.listen(3000);
-console.log('gumerPSN Example running at http://localhost:3000/');
+app.listen(PORT);
+
