@@ -9,7 +9,7 @@
 */
 
 var
-   PORT     = process.env.PORT || 55555000
+   PORT     = process.env.PORT || 5000
 	,gumerPSN = require('./lib/psn')		 // Gumer Playstation module
 	,express 	= require('express')	 // Express
 	,async 	  = require('async')
