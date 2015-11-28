@@ -83,5 +83,5 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 	})
 })
 
-// We listen in the port 3000
+// We listen in the port 5000
 app.listen(PORT);
