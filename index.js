@@ -53,7 +53,7 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 			async.each(friendsData.friendList, function(friend, callback) {
 				gumerPSN.getProfile(friend.onlineId, function(error, profileData) {
 					if (!error) {
-            if (profileData.presence.primaryInfo.onlineStatus == "offline"){
+            if (profileData.presence.primaryInfo.onlineStatus == "online"){
               console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
   						onlineFriends += friend.onlineId + ";";
             }
