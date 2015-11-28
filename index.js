@@ -55,7 +55,7 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 					if (!error) {
             if (profileData.presence.primaryInfo.onlineStatus == "offline"){
               console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
-  						onlineFriends += "<" + friend.onlineId + ">";
+  						onlineFriends += friend.onlineId + ";";
             }
 						callback();
 					}
