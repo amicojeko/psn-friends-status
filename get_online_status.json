@@ -1,0 +1,6 @@
+{ event: 'get_online_status',
+   url: 'http://psn-friends-status.pheeco.it/PSN/jeko23/friends_online_status',
+   deviceid: undefined,
+   requestType: 'GET',
+   mydevices: true },
+headers: { Authorization: 'Bearer 974c2782acca4d72e22cbdcb1fa74ca982d268a9' } }

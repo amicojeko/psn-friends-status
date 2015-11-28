@@ -45,7 +45,7 @@ app.param(function(name, fn){
 
 // Gets the ID owner's profile friends list and returns the JSON object.
 app.get('/PSN/:id/friends_online_status', function(req, res){
-	var onlineFriends = { }
+	var onlineFriends = ""
 
 	gumerPSN.getFriends(req.params.id, function(error, friendsData) {
 		if (!error) {
@@ -53,8 +53,10 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 			async.each(friendsData.friendList, function(friend, callback) {
 				gumerPSN.getProfile(friend.onlineId, function(error, profileData) {
 					if (!error) {
-						console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
-						onlineFriends[friend.onlineId] =  profileData.presence.primaryInfo.onlineStatus
+            if (profileData.presence.primaryInfo.onlineStatus == "online"){
+              console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
+  						onlineFriends += "<" + friend.onlineId + ">";
+            }
 						callback();
 					}
 				})
@@ -83,4 +85,3 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 
 // We listen in the port 3000
 app.listen(PORT);
-
