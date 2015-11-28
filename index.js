@@ -69,12 +69,14 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 			})
 		}
 		else {
-			if (friendsData.error.code == 2105356) {	// User not found code
-				res.send({
+			if ( (friendsData != undefined) && (friendsData.error.code == 2105356)) {	// User not found code
+        console.log("PSN ID not found");
+        res.send({
 					error: true, message: "PSN ID not found"
 				})
 			}
 			else {
+        console.log("Something went terribly wrong, submit an issue on GitHub please!");
 				res.send({
 					error: true, message: "Something went terribly wrong, submit an issue on GitHub please!", response: friendsData
 				})
