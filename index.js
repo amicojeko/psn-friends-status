@@ -20,7 +20,7 @@ var
 console.log('Starting gPSN');
 
 gumerPSN.init({	                     // Our PSN Module, we have to start it once. - irkinsander
-	 debug      : true	                 // Let's set it true, it's still in early development. So, report everything that goes wrong please.
+	 debug      : false	                 // Let's set it true, it's still in early development. So, report everything that goes wrong please.
 	,email      : process.env.PSN_EMAIL // A valid PSN/SCE account (can be new one) // TODO: Using the user's credentials to do this.
 	,password   : process.env.PSN_PASS	 // Account's password
 	,npLanguage : "en"			             // The language the trophy's name and description will shown as
@@ -54,7 +54,7 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 				gumerPSN.getProfile(friend.onlineId, function(error, profileData) {
 					if (!error) {
             if (profileData.presence.primaryInfo.onlineStatus == "online"){
-              console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
+              // console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
   						onlineFriends += friend.onlineId + ";";
             }
 						callback();
@@ -62,7 +62,7 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 				})
 			}, function(err){
 				if(err){
-					console.log(err);
+					// console.log(err);
 				} else {
 					res.send(onlineFriends);
 				}
