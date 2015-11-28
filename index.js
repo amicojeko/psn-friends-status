@@ -52,6 +52,7 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 
 			async.each(friendsData.friendList, function(friend, callback) {
 				gumerPSN.getProfile(friend.onlineId, function(error, profileData) {
+          console.log(profileData);
 					if (!error) {
             if (profileData.presence.primaryInfo.onlineStatus == "online"){
               console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
@@ -69,13 +70,12 @@ app.get('/PSN/:id/friends_online_status', function(req, res){
 			})
 		}
 		else {
-			if ( (friendsData != undefined) && (friendsData.error.code == 2105356)) {	// User not found code
-        console.log("PSN ID not found");
+			if ( (friendsData != undefined) && friendsData.error ) {	// User not found code
+        console.log(friendsData.error.message);
         res.send({
-					error: true, message: "PSN ID not found"
+					error: true, message: friendsData.error.message
 				})
-			}
-			else {
+			} else {
         console.log("Something went terribly wrong, submit an issue on GitHub please!");
 				res.send({
 					error: true, message: "Something went terribly wrong, submit an issue on GitHub please!", response: friendsData
