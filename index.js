@@ -44,6 +44,29 @@ app.param(function(name, fn){
 });
 
 // Gets the ID owner's profile friends list and returns the JSON object.
+
+  // Gets the ID owner's trophy (first 100) information and returns the JSON object.
+app.get('/PSN/:id/friends', function(req, res){
+	gumerPSN.getFriends(req.params.id,function(error, friendData) {
+		if (!error) {
+			res.send(friendData)
+		}
+		else {
+			if (friendData.error.code == 2105356) {		// User not found code
+				res.send({
+					error: true, message: "PSN ID not found"
+				})
+			}
+			else {
+				res.send({
+					error: true, message: "Something went terribly wrong, submit an issue on GitHub please!", response: friendData
+				})
+			}
+		}
+	})
+})
+
+// Gets the ID owner's profile friends online status and returns the TEXT object.
 app.get('/PSN/:id/friends_online_status', function(req, res){
 	var onlineFriends = ""
 
