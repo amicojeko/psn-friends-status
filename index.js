@@ -50,17 +50,12 @@ app.param(function(name, fn){
 // Gets the ID owner's trophy (first 100) information and returns the JSON object.
 app.get('/friends', function(req, res){
 
-  var onlineFriends = ""
+  var onlineFriends = "";
 
   async.each(FRIENDS, function(friend, callback) {
     gumerPSN.getProfile(friend.onlineId, function(error, profileData) {
       if (!error) {
-        if (profileData.presence.primaryInfo.onlineStatus == "online"){
-          console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
-          onlineFriends += Color.hex_to_int32(friend.color) + ";";
-        } else {
-          onlineFriends += "0;";
-        }
+        friend.online = (profileData.presence.primaryInfo.onlineStatus == "online") ? true : false;
       }
       callback();
     })
@@ -68,7 +63,11 @@ app.get('/friends', function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.send(onlineFriends);
+      var colors = FRIENDS.map(function(friend){
+        //return friend.online ? Color.hex_to_int32(friend.color) : 0;
+        return Color.hex_to_int32(friend.color);
+      });
+      res.send(colors.join(";"));
     }
   })
 
