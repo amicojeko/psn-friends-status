@@ -67,7 +67,7 @@ app.get('/friends', function(req, res){
         //return friend.online ? Color.hex_to_int32(friend.color) : 0;
         return Color.hex_to_int32(friend.color);
       });
-      res.send(colors.join(";"));
+      res.send(colors.join(";") + ';');
     }
   })
 

@@ -1,10 +1,10 @@
 [
   { "onlineId":"BrunoScla",      "color": "ff0000"},
-  { "onlineId":"intinig",        "color": "00ff00"},
-  { "onlineId":"DiGnoforzaROMA", "color": "0000ff"},
-  { "onlineId":"josyfarai",      "color": "ff9900"},
-  { "onlineId":"afrojeans1",     "color": "ff00ff"},
+  { "onlineId":"intinig",        "color": "00ffff"},
+  { "onlineId":"DiGnoforzaROMA", "color": "00ff00"},
+  { "onlineId":"josyfarai",      "color": "ff00ff"},
+  { "onlineId":"afrojeans1",     "color": "0000ff"},
   { "onlineId":"m_mt_st",        "color": "ffff00"},
-  { "onlineId":"Gippo79Roma",    "color": "ff00ff"},
+  { "onlineId":"Gippo79Roma",    "color": "00a0ff"},
   { "onlineId":"chiapass",       "color": "ffffff"}
 ]
