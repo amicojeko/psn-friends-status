@@ -8,23 +8,25 @@
 *
 */
 
-var
-   PORT     = process.env.PORT || 5000
-	,gumerPSN = require('./lib/psn') // Gumer Playstation module
-	,express 	= require('express')	 // Express
-	,async 	  = require('async')
-	,app 		  = express()				     // Express application instance
-	,idregex 	= /[A-Za-z0-9].{2,15}/ // A simple regex for PSN id's // TODO: Make it more accurate and fancy
-;
+
+var PORT     = process.env.PORT || 5000;
+var FRIENDS  = require('./config/friends');
+var gumerPSN = require('./lib/psn'); // Gumer Playstation module
+var Color    = require('./lib/color');
+var express  = require('express');	 // Express
+var async 	 = require('async');
+var app 		 = express();				     // Express application instance
+var idregex  = /[A-Za-z0-9].{2,15}/; // A simple regex for PSN id's // TODO: Make it more accurate and fancy
+
 
 console.log('Starting gPSN');
 
 gumerPSN.init({	                      // Our PSN Module, we have to start it once. - irkinsander
-	 debug      : true	                // Let's set it true, it's still in early development. So, report everything that goes wrong please.
-	,email      : process.env.PSN_EMAIL // A valid PSN/SCE account (can be new one) // TODO: Using the user's credentials to do this.
-	,password   : process.env.PSN_PASS	// Account's password
-	,npLanguage : "en"			            // The language the trophy's name and description will shown as
-	,region     : "it"			            // The server region that will push data
+	debug      : true,	                // Let's set it true, it's still in early development. So, report everything that goes wrong please.
+	email      : process.env.PSN_EMAIL, // A valid PSN/SCE account (can be new one) // TODO: Using the user's credentials to do this.
+	password   : process.env.PSN_PASS,	// Account's password
+	npLanguage : "en",			            // The language the trophy's name and description will shown as
+	region     : "it"			            // The server region that will push data
 });
 
 // Taken from Express site, this takes /{{id}}/ parameter
@@ -44,6 +46,33 @@ app.param(function(name, fn){
 });
 
 // Gets the ID owner's profile friends list and returns the JSON object.
+
+// Gets the ID owner's trophy (first 100) information and returns the JSON object.
+app.get('/friends', function(req, res){
+
+  var onlineFriends = ""
+
+  async.each(FRIENDS, function(friend, callback) {
+    gumerPSN.getProfile(friend.onlineId, function(error, profileData) {
+      if (!error) {
+        if (profileData.presence.primaryInfo.onlineStatus == "online"){
+          console.log('adding ' + friend.onlineId + ' status: ' + profileData.presence.primaryInfo.onlineStatus)
+          onlineFriends += Color.hex_to_int32(friend.color) + ";";
+        } else {
+          onlineFriends += "0;";
+        }
+      }
+      callback();
+    })
+  }, function(err){
+    if(err){
+      console.log(err);
+    } else {
+      res.send(onlineFriends);
+    }
+  })
+
+})
 
   // Gets the ID owner's trophy (first 100) information and returns the JSON object.
 app.get('/PSN/:id/friends', function(req, res){

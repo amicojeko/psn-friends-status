@@ -6,3 +6,4 @@ particle webhook GET get_online_status http://<server>/PSN/<user>/friends_online
 particle webhook list
 particle subscribe DEBUG
 ```
+costomise and rename 'config/friends.json.example' into 'config/friends.json'
