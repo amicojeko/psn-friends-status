@@ -64,8 +64,8 @@ app.get('/friends', function(req, res){
       console.log(err);
     } else {
       var colors = FRIENDS.map(function(friend){
-        //return friend.online ? Color.hex_to_int32(friend.color) : 0;
-        return Color.hex_to_int32(friend.color);
+        return friend.online ? Color.hex_to_int32(friend.color) : 0;
+        //return Color.hex_to_int32(friend.color);
       });
       res.send(colors.join(";") + ';');
     }
