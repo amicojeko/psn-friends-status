@@ -1,10 +1,10 @@
 [
   { "onlineId":"BrunoScla",      "color": "ff0000"},
-  { "onlineId":"intinig",        "color": "00ffff"},
-  { "onlineId":"DiGnoforzaROMA", "color": "00ff00"},
-  { "onlineId":"josyfarai",      "color": "ff00ff"},
-  { "onlineId":"afrojeans1",     "color": "0000ff"},
-  { "onlineId":"m_mt_st",        "color": "ffff00"},
-  { "onlineId":"Gippo79Roma",    "color": "00a0ff"},
-  { "onlineId":"chiapass",       "color": "ffffff"}
+  { "onlineId":"intinig",        "color": "ff6600"},
+  { "onlineId":"DiGnoforzaROMA", "color": "ffff00"},
+  { "onlineId":"josyfarai",      "color": "00ff00"},
+  { "onlineId":"afrojeans1",     "color": "00ffff"},
+  { "onlineId":"m_mt_st",        "color": "0000ff"},
+  { "onlineId":"Gippo79Roma",    "color": "9900cc"},
+  { "onlineId":"chiapass",       "color": "ff0099"}
 ]
